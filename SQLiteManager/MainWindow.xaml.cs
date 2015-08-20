@@ -21,9 +21,17 @@ namespace SQLiteManager
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private MainViewModel model = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = model;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            model.SaveInfo();
         }
     }
 }

@@ -1,7 +1,10 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SQLiteManager.ViewModel
@@ -32,7 +35,54 @@ namespace SQLiteManager.ViewModel
             ////else
             ////{
             ////    // Code runs "for real"
-            ////}                     
+            ////}           
+
+            try
+            {
+                var root = Registry.CurrentUser.CreateSubKey("SOFTWARE").CreateSubKey("SQLiteManager");
+                var key = root.CreateSubKey("RegistryInformation");
+                string[] paths = key.GetValueNames();
+                foreach (string path in paths)
+                {
+                    if (path == null || path.Count() == 0)
+                        continue;
+                    string name = key.GetValue(path).ToString();
+                    AddDB(name, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "¶ÁÈ¡×¢²á±íÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void SaveInfo()
+        {
+            try
+            {
+                var root = Registry.CurrentUser.CreateSubKey("SOFTWARE").CreateSubKey("SQLiteManager");
+                root.DeleteSubKeyTree("RegistryInformation",false);
+                var key = root.CreateSubKey("RegistryInformation");
+                foreach (DBViewModel db in DBs)
+                {
+                    key.SetValue(db.DBPath, db.DBName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "±£´æÖÁ×¢²á±íÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddDB(string name,string path)
+        {
+            if (name == null || path == null)
+                return;
+            int count = DBs.Where(db => { return db.DBPath == path; }).Count();
+            if (count != 0)
+                return;    
+            DBViewModel newDB = new DBViewModel(name, path);
+            DBs.Add(newDB);
         }
 
         private ObservableCollection<DBViewModel> dbs = new ObservableCollection<DBViewModel>();
@@ -68,8 +118,7 @@ namespace SQLiteManager.ViewModel
             string[] paths = dlg.FileNames;
             foreach (string path in paths)
             {
-                DBViewModel db = new DBViewModel(System.IO.Path.GetFileNameWithoutExtension(path), path);
-                DBs.Add(db);
+                AddDB(System.IO.Path.GetFileNameWithoutExtension(path), path);
             }
             
         }
