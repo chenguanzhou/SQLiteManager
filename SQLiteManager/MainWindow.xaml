@@ -80,14 +80,30 @@
                                   x:Name="listView">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding DBName}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Grid.Row="1" Text="{Binding DBPath}" FontSize="15"></TextBlock>
-                                    </Grid>                                    
+                                    <Border Padding="5">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsValid}" Value="True">
+                                                        <Setter Property="BorderBrush" Value="White"></Setter>
+                                                        <Setter Property="BorderThickness" Value="0"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsValid}" Value="False">
+                                                        <Setter Property="BorderBrush" Value="Red"></Setter>
+                                                        <Setter Property="BorderThickness" Value="2"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="{Binding DBName}" FontWeight="Bold"></TextBlock>
+                                            <TextBlock Grid.Row="1" Text="{Binding DBPath}" FontSize="15"></TextBlock>
+                                        </Grid>
+                                    </Border>                                                                       
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>

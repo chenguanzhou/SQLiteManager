@@ -76,6 +76,17 @@ namespace SQLiteManager.ViewModel
             }
         }
 
+        private void CreateDB(string path)
+        {
+            if (path == null)
+                return;
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
+            if (name == null)
+                return;
+
+            AddDB(name, path);
+        }
+
         private void AddDB(string name,string path)
         {
             if (name == null || path == null)
@@ -127,22 +138,43 @@ namespace SQLiteManager.ViewModel
 
         private void CreateDBCommandExcute()
         {
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title = "创建SQLite数据库";
+                dlg.Filter = "SQLite 数据库文件(*.db)|*.db|所有文件(*.*)|*.*";
+                if (dlg.ShowDialog() != true)
+                    return;
 
+                CreateDB(dlg.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "创建SQLite数据库文件失败", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         public ICommand CreateDBCommand { get { return new RelayCommand(CreateDBCommandExcute); } }
 
         private void RegisterDBCommandExcute()
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "打开数据库";
-            dlg.Filter = "SQLite 数据库文件(*.db)|*.db|所有文件(*.*)|*.*";
-            if (dlg.ShowDialog() != true)
-                return;
-
-            string[] paths = dlg.FileNames;
-            foreach (string path in paths)
+            try
             {
-                AddDB(System.IO.Path.GetFileNameWithoutExtension(path), path);
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Title = "打开数据库";
+                dlg.Filter = "SQLite 数据库文件(*.db)|*.db|所有文件(*.*)|*.*";
+                dlg.Multiselect = true;
+                if (dlg.ShowDialog() != true)
+                    return;
+
+                string[] paths = dlg.FileNames;
+                foreach (string path in paths)
+                {
+                    AddDB(System.IO.Path.GetFileNameWithoutExtension(path), path);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "注册SQLite数据库失败", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
         }
@@ -150,9 +182,16 @@ namespace SQLiteManager.ViewModel
 
         private void RemoveDBCommandExcute()
         {
-            if (ActiveDB == null)
-                return;
-            RemoveDB(ActiveDB);
+            try
+            {
+                if (ActiveDB == null)
+                    return;
+                RemoveDB(ActiveDB);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "移除SQLite数据库文件失败", MessageBoxButton.OK, MessageBoxImage.Error);
+            }            
         }
 
         public ICommand RemoveDBCommand 
