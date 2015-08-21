@@ -49,6 +49,8 @@ namespace SQLiteManager.ViewModel
                     string name = key.GetValue(path).ToString();
                     AddDB(name, path);
                 }
+                if (DBs.Count > 0)
+                    ActiveDB = DBs[0];
             }
             catch (Exception ex)
             {
@@ -85,6 +87,13 @@ namespace SQLiteManager.ViewModel
             DBs.Add(newDB);
         }
 
+        private void RemoveDB(DBViewModel db)
+        {
+            DBs.Remove(db);
+            if (DBs.Count > 0)
+                ActiveDB = DBs[0];
+        }
+
         private ObservableCollection<DBViewModel> dbs = new ObservableCollection<DBViewModel>();
         public ObservableCollection<DBViewModel> DBs
         {
@@ -98,6 +107,20 @@ namespace SQLiteManager.ViewModel
                     return;
                 dbs = value;
                 RaisePropertyChanged("DBs");
+            }
+        }
+
+        private DBViewModel activeDB = null;
+        public DBViewModel ActiveDB
+        {
+            get
+            {
+                return activeDB;
+            }
+            set
+            {
+                activeDB = value;
+                RaisePropertyChanged("ActiveDB");
             }
         }
 
@@ -126,8 +149,17 @@ namespace SQLiteManager.ViewModel
 
         private void RemoveDBCommandExcute()
         {
-
+            if (ActiveDB == null)
+                return;
+            RemoveDB(ActiveDB);
         }
-        public ICommand RemoveDBCommand { get { return new RelayCommand(RemoveDBCommandExcute); } }
+
+        public ICommand RemoveDBCommand 
+        {
+            get 
+            { 
+                return new RelayCommand(RemoveDBCommandExcute,()=>ActiveDB!=null); 
+            } 
+        }
     }
 }

@@ -70,11 +70,15 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Button Grid.Row="0" Grid.Column="0" Content="新建" Command="{Binding CreateDBCommand}"></Button>
                         <Button Grid.Row="0" Grid.Column="1" Content="注册" Command="{Binding RegisterDBCommand}"></Button>
-                        <Button Grid.Row="0" Grid.Column="2" Content="注销" Command="{Binding RemoveDBCommand}"></Button>
-                        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding DBs}">
+                        <Button Grid.Row="0" Grid.Column="2" Content="移除" Command="{Binding RemoveDBCommand}"></Button>
+                        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+                                  ItemsSource="{Binding DBs,Mode=TwoWay}"
+                                  SelectedItem="{Binding ActiveDB,Mode=TwoWay}"
+                                  x:Name="listView">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="5">
@@ -88,6 +92,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+                        <TextBlock Grid.Row="2" Text="{Binding ElementName=listView,Path=SelectedIndex}"></TextBlock>
                     </Grid>
                 </GroupBox>
             </Grid>
