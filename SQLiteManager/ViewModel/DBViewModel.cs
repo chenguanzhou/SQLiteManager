@@ -1,6 +1,8 @@
 using GalaSoft.MvvmLight;
 using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 
 namespace SQLiteManager.ViewModel
@@ -35,6 +37,13 @@ namespace SQLiteManager.ViewModel
                 conn = new SQLiteConnection(builder.ConnectionString);
                 conn.Open();
                 var schema = conn.GetSchema("Tables");
+
+                foreach (System.Data.DataRow row in schema.Rows)
+                {
+                    TableViewModel table = new TableViewModel(row.ItemArray[2].ToString(),conn);
+                    Tables.Add(table);
+                }
+                
 
                 IsValid = true;
             }
@@ -75,6 +84,35 @@ namespace SQLiteManager.ViewModel
                     return;
                 isValid = value;
                 RaisePropertyChanged("IsValid");
+            }
+        }
+
+        private ObservableCollection<TableViewModel> tables = new ObservableCollection<TableViewModel>();
+        public ObservableCollection<TableViewModel> Tables
+        {
+            get { return tables; }
+            set
+            {
+                if (tables == value)
+                    return;
+                tables = value;
+                RaisePropertyChanged("Tables");
+            }
+        }
+
+        private TableViewModel activatedTable = null;
+        public TableViewModel ActivatedTable
+        {
+            get
+            {
+                return activatedTable;
+            }
+            set
+            {
+                if (activatedTable == value)
+                    return;
+                activatedTable = value;
+                RaisePropertyChanged("ActivatedTable");
             }
         }
     }

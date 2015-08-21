@@ -112,9 +112,13 @@
                     <Button Grid.Column="2" Content="删除表"></Button>
                 </Grid>
                 <GroupBox Grid.Row="1" Header="所有表格">
-                    <ListView >
-                        <ListViewItem>hehe</ListViewItem>
-                        <ListViewItem>hehe2</ListViewItem>
+                    <ListView ItemsSource="{Binding ActiveDB.Tables}"
+                              SelectedItem="{Binding ActiveDB.ActivatedTable}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </GroupBox>
 
@@ -131,7 +135,7 @@
             </Grid>
 
             <Grid Grid.Column="2">
-                <DataGrid Margin="10" BorderThickness="0">
+                <DataGrid Margin="10" BorderThickness="0" ItemsSource="{Binding ActiveDB.ActivatedTable.Table}">
                 </DataGrid>
             </Grid>
         </Grid>   
