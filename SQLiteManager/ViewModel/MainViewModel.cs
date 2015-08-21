@@ -85,6 +85,7 @@ namespace SQLiteManager.ViewModel
                 return;    
             DBViewModel newDB = new DBViewModel(name, path);
             DBs.Add(newDB);
+            ActiveDB = newDB;
         }
 
         private void RemoveDB(DBViewModel db)

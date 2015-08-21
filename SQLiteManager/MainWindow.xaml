@@ -70,7 +70,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Button Grid.Row="0" Grid.Column="0" Content="新建" Command="{Binding CreateDBCommand}"></Button>
                         <Button Grid.Row="0" Grid.Column="1" Content="注册" Command="{Binding RegisterDBCommand}"></Button>
@@ -92,7 +91,6 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <TextBlock Grid.Row="2" Text="{Binding ElementName=listView,Path=SelectedIndex}"></TextBlock>
                     </Grid>
                 </GroupBox>
             </Grid>

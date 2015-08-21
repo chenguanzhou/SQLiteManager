@@ -1,5 +1,7 @@
 using GalaSoft.MvvmLight;
+using System;
 using System.Collections;
+using System.Data.SQLite;
 
 namespace SQLiteManager.ViewModel
 {
@@ -17,33 +19,44 @@ namespace SQLiteManager.ViewModel
     /// </summary>
     public class DBViewModel : ViewModelBase
     {
+        private SQLiteConnection conn = null;
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public DBViewModel(string dbName, string dbPath)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////} 
             this.dbName = dbName;
             this.dbPath = dbPath;
+
+            try
+            {
+                SQLiteConnectionStringBuilder builder = new SQLiteConnectionStringBuilder();
+                builder.DataSource = DBPath;
+                conn = new SQLiteConnection(builder.ConnectionString);
+                conn.Open();
+                var schema = conn.GetSchema("Tables");
+
+                IsValid = true;
+            }
+            catch (Exception ex)
+            {
+                IsValid = false;
+            }
         }
+
+
 
         private string dbPath;
         public string DBPath { get { return dbPath; } }
 
         private string dbName;
-        public string DBName { 
-            get 
-            { 
-                return dbName; 
+        public string DBName
+        {
+            get
+            {
+                return dbName;
             }
-            set 
+            set
             {
                 if (dbName == value)
                     return;
