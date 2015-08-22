@@ -1,10 +1,11 @@
-using GalaSoft.MvvmLight;
+ï»¿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SQLiteManager.ViewModel
@@ -23,6 +24,7 @@ namespace SQLiteManager.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        public static MainViewModel This { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -54,7 +56,7 @@ namespace SQLiteManager.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "¶ÁÈ¡×¢²á±íÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "è¯»å–æ³¨å†Œè¡¨å¤±è´¥", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -72,7 +74,7 @@ namespace SQLiteManager.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "±£´æÖÁ×¢²á±íÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "ä¿å­˜è‡³æ³¨å†Œè¡¨å¤±è´¥", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -133,16 +135,34 @@ namespace SQLiteManager.ViewModel
             {
                 activeDB = value;
                 RaisePropertyChanged("ActiveDB");
+                RaisePropertyChanged("IsActiveDBEnable");
             }
         }
+
+        public bool IsActiveDBEnable { get { return ActiveDB == null ? false : ActiveDB.IsValid; } }
+
+        private UserControl currentControl = null;
+        public UserControl CurrentControl
+        {
+            get { return currentControl; }
+            set
+            {
+                if (currentControl == value)
+                    return;
+                currentControl = value;
+                RaisePropertyChanged("CurrentControl");
+                RaisePropertyChanged("IsCurrentControlVisible");
+            }
+        }
+        public Visibility IsCurrentControlVisible { get { return CurrentControl == null ? Visibility.Collapsed : Visibility.Visible; } }
 
         private void CreateDBCommandExcute()
         {
             try
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Title = "´´½¨SQLiteÊı¾İ¿â";
-                dlg.Filter = "SQLite Êı¾İ¿âÎÄ¼ş(*.db)|*.db|ËùÓĞÎÄ¼ş(*.*)|*.*";
+                dlg.Title = "åˆ›å»ºSQLiteæ•°æ®åº“";
+                dlg.Filter = "SQLite æ•°æ®åº“æ–‡ä»¶(*.db)|*.db|æ‰€æœ‰æ–‡ä»¶(*.*)|*.*";
                 if (dlg.ShowDialog() != true)
                     return;
 
@@ -150,7 +170,7 @@ namespace SQLiteManager.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "´´½¨SQLiteÊı¾İ¿âÎÄ¼şÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "åˆ›å»ºSQLiteæ•°æ®åº“æ–‡ä»¶å¤±è´¥", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public ICommand CreateDBCommand { get { return new RelayCommand(CreateDBCommandExcute); } }
@@ -160,8 +180,8 @@ namespace SQLiteManager.ViewModel
             try
             {
                 OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Title = "´ò¿ªÊı¾İ¿â";
-                dlg.Filter = "SQLite Êı¾İ¿âÎÄ¼ş(*.db)|*.db|ËùÓĞÎÄ¼ş(*.*)|*.*";
+                dlg.Title = "æ‰“å¼€æ•°æ®åº“";
+                dlg.Filter = "SQLite æ•°æ®åº“æ–‡ä»¶(*.db)|*.db|æ‰€æœ‰æ–‡ä»¶(*.*)|*.*";
                 dlg.Multiselect = true;
                 if (dlg.ShowDialog() != true)
                     return;
@@ -174,7 +194,7 @@ namespace SQLiteManager.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "×¢²áSQLiteÊı¾İ¿âÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "æ³¨å†ŒSQLiteæ•°æ®åº“å¤±è´¥", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
         }
@@ -190,7 +210,7 @@ namespace SQLiteManager.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ÒÆ³ıSQLiteÊı¾İ¿âÎÄ¼şÊ§°Ü", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "ç§»é™¤SQLiteæ•°æ®åº“æ–‡ä»¶å¤±è´¥", MessageBoxButton.OK, MessageBoxImage.Error);
             }            
         }
 

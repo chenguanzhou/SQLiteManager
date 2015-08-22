@@ -1,9 +1,12 @@
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using System.Data;
 
 namespace SQLiteManager.ViewModel
 {
@@ -113,6 +116,22 @@ namespace SQLiteManager.ViewModel
                     return;
                 activatedTable = value;
                 RaisePropertyChanged("ActivatedTable");
+            }
+        }
+                
+        public ICommand ShowCreateTableCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    () =>
+                    {
+                        UserControlCreateTable control = new UserControlCreateTable();
+                        control.DataContext = new CreateTableViewModel();
+                        MainViewModel.This.CurrentControl = control;
+                    },
+                    () => IsValid
+                );
             }
         }
     }

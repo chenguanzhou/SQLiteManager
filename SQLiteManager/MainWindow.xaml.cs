@@ -22,10 +22,13 @@ namespace SQLiteManager
     public partial class MainWindow : Window
     {
 
-        private MainViewModel model = new MainViewModel();
+        private MainViewModel model = new MainViewModel();        
+
         public MainWindow()
         {
             InitializeComponent();
+
+            MainViewModel.This = model;
             this.DataContext = model;
         }
 

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="SQLiteManager.UserControlCreateTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SQLiteManager"
+             xmlns:vm="clr-namespace:SQLiteManager.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" 
+                           HorizontalAlignment="Center" 
+                           Text="新建表" FontSize="30" FontWeight="Bold"
+                           Padding="5"></TextBlock>
+        <GroupBox Grid.Row="1" Header="表格名">
+            <TextBox Text="{Binding Name}" Padding="5" Margin="5"></TextBox>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="字段" >
+            <DataGrid x:Name="DataGridFields" ItemsSource="{Binding Fields}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="字段名"></DataGridTextColumn>
+                    <DataGridComboBoxColumn Header="类型"></DataGridComboBoxColumn>
+                    <DataGridCheckBoxColumn Header="Primary Key"></DataGridCheckBoxColumn>
+                    <DataGridCheckBoxColumn Header="Unique"></DataGridCheckBoxColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="创建" 
+                            Command="{Binding CreateCommand}" 
+                            CommandParameter="{Binding ElementName=DataGridFields,Path=ItemsSource}"></Button>
+            <Button Content="取消"
+                            Command="{Binding CancelCommand}"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
