@@ -40,10 +40,9 @@ namespace SQLiteManager.ViewModel
                 conn = new SQLiteConnection(builder.ConnectionString);
                 conn.Open();
                 var schema = conn.GetSchema("Tables");
-
                 foreach (System.Data.DataRow row in schema.Rows)
                 {
-                    TableViewModel table = new TableViewModel(row.ItemArray[2].ToString(),conn);
+                    TableViewModel table = new TableViewModel(row.ItemArray[2].ToString(), row.ItemArray[6].ToString(), conn);
                     Tables.Add(table);
                 }
                 

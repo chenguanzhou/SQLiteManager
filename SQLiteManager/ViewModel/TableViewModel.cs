@@ -26,9 +26,10 @@ namespace SQLiteManager.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public TableViewModel(string name,SQLiteConnection conn)
+        public TableViewModel(string name,string definition,SQLiteConnection conn)
         {
             Name = name;
+            this.definition = definition;
             this.conn = conn;
             adapter = new SQLiteDataAdapter("select * from " + Name, conn);
             adapter.Fill(Table);
@@ -47,6 +48,15 @@ namespace SQLiteManager.ViewModel
                     return;
                 name = value;
                 RaisePropertyChanged("Name");
+            }
+        }
+
+        private string definition = null;
+        public string Definition
+        {
+            get
+            {
+                return definition;
             }
         }
 

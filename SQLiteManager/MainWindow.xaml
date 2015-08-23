@@ -8,7 +8,7 @@
         Title="SQLite Manager" MinWidth="800" MinHeight="400" Closing="Window_Closing">
     <Window.Resources>
         <con:NullToVisibilityConverter x:Key="NullToVisibility"></con:NullToVisibilityConverter>
-        <con:OppositeConverter x:Key="Opposite"></con:OppositeConverter>   
+        <con:OppositeConverter x:Key="Opposite"></con:OppositeConverter>
     </Window.Resources>
     <Grid x:Name="MainGrid">
         <Grid.Resources>
@@ -150,10 +150,35 @@
                 </Grid>
                 <GroupBox Grid.Row="1" Header="所有表格" DataContext="{Binding ActiveDB}">
                     <ListView ItemsSource="{Binding Tables}"
-                              SelectedItem="{Binding ActivatedTable}">
+                              SelectedItem="{Binding ActivatedTable}"
+                              SelectionMode="Single">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <Expander Header="{Binding Name}" Margin="3" 
+                                          IsExpanded="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Content="定义"></Label>
+                                        <!--<Label Grid.Row="0" Grid.Column="1" Content="{Binding Definition}">
+                                            <Label.Resources>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                                </Style>
+                                            </Label.Resources>
+                                        </Label>-->
+                                        <Label Grid.Row="0" Grid.Column="1">
+                                            <Label.Content>
+                                                <AccessText TextWrapping="Wrap" Text="{Binding Definition}"/>
+                                            </Label.Content>
+                                        </Label>
+                                    </Grid>
+                                </Expander>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -188,7 +213,7 @@
         </Border>-->
 
         <!--New Table Control-->
-        
+
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="White"
@@ -221,7 +246,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                    </Style.Triggers>                    
+                    </Style.Triggers>
                 </Style>
             </Border.Style>
             <ContentControl Content="{Binding CurrentControl}"></ContentControl>
