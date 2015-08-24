@@ -1,9 +1,11 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Input;
 
 namespace SQLiteManager.ViewModel
 {
@@ -116,5 +118,8 @@ namespace SQLiteManager.ViewModel
                 RaisePropertyChanged("FieldsInfo");
             }
         }
+
+
+        
     }
 }

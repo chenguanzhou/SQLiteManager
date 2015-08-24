@@ -35,7 +35,7 @@ namespace SQLiteManager.Converter
                     throw new Exception();
                 return -val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return obj;
             }

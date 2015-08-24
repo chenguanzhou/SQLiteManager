@@ -49,7 +49,7 @@ namespace SQLiteManager.ViewModel
 
                 IsValid = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 IsValid = false;
             }
@@ -130,6 +130,21 @@ namespace SQLiteManager.ViewModel
                         MainViewModel.This.CurrentControl = control;
                     },
                     () => IsValid
+                );
+            }
+        }
+
+        public ICommand DeleteCurrentTableCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    ()=>
+                    {
+                       
+                    },
+                    () => IsValid && ActivatedTable != null
                 );
             }
         }

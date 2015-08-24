@@ -140,7 +140,7 @@
             <Grid Grid.Column="1" IsEnabled="{Binding IsActiveDBEnable}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" DataContext="{Binding ActiveDB}">
@@ -151,7 +151,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="新建表" Command="{Binding ShowCreateTableCommand}"></Button>
                     <Button Grid.Column="1" Content="新建视图"></Button>
-                    <Button Grid.Column="2" Content="删除表"></Button>
+                    <Button Grid.Column="2" Content="删除表" Command="{Binding DeleteCurrentTableCommand}"></Button>
                 </Grid>
                 <GroupBox Grid.Row="1" Header="所有表格" DataContext="{Binding ActiveDB}">
                     <ListView ItemsSource="{Binding Tables}" ScrollViewer.CanContentScroll="False"
@@ -272,9 +272,6 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                         To="1" Duration="0:0:0.75">
-                                        </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="-1000" To="0" Duration="0:0:1">
                                             <DoubleAnimation.EasingFunction>
                                                 <ElasticEase EasingMode="EaseOut" Oscillations="1" Springiness="5"></ElasticEase>

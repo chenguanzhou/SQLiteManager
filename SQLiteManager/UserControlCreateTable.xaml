@@ -7,6 +7,39 @@
              xmlns:vm="clr-namespace:SQLiteManager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <Trigger Property="Visibility" Value="Visible">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard x:Name="FadeOutAnimation">
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                FillBehavior="Stop"
+                                BeginTime="0:0:5" From="1.0" To="0.0"
+                                Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames 
+                                Storyboard.TargetProperty="Visibility"
+                                BeginTime="0:0:7">
+                                    <DiscreteObjectKeyFrame>
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Hidden</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
