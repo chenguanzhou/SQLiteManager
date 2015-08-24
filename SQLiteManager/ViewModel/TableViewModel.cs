@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SQLite;
 
@@ -33,6 +34,30 @@ namespace SQLiteManager.ViewModel
             this.conn = conn;
             adapter = new SQLiteDataAdapter("select * from " + Name, conn);
             adapter.Fill(Table);
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand("select * from " + Name, conn);
+                using (var reader = cmd.ExecuteReader(CommandBehavior.KeyInfo | CommandBehavior.SchemaOnly))
+                {
+                    var columnSchemaTable = reader.GetSchemaTable();
+                    foreach (DataRow dr in columnSchemaTable.Rows)
+                    {
+                        FieldViewModel fieldInfo = new FieldViewModel()
+                        {
+                            Name = dr["ColumnName"].ToString(),
+                            Type = dr["DataTypeName"].ToString(),
+                            IsPrimaryKey = (bool)dr["IsKey"],
+                            IsUnique = (bool)dr["IsUnique"],
+                            AllowDBNull = (bool)dr["AllowDBNull"]
+                        };
+                        FieldsInfo.Add(fieldInfo);
+                    }
+                }
+            }            
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
+            }
         }
 
         private string name = null;
@@ -73,6 +98,22 @@ namespace SQLiteManager.ViewModel
                     return;
                 table = value;
                 RaisePropertyChanged("Table");
+            }
+        }
+
+        private ObservableCollection<FieldViewModel> fieldsInfo = new ObservableCollection<FieldViewModel>();
+        public ObservableCollection<FieldViewModel> FieldsInfo
+        {
+            get
+            {
+                return fieldsInfo;
+            }
+            set
+            {
+                if (fieldsInfo == value)
+                    return;
+                fieldsInfo = value;
+                RaisePropertyChanged("FieldsInfo");
             }
         }
     }

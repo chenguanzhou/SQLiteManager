@@ -9,7 +9,12 @@
     <Window.Resources>
         <con:NullToVisibilityConverter x:Key="NullToVisibility"></con:NullToVisibilityConverter>
         <con:OppositeConverter x:Key="Opposite"></con:OppositeConverter>
+        <con:BooleanToVisibilityConverter x:Key="BooleanToVisibility" UseHidden="False"></con:BooleanToVisibilityConverter>
     </Window.Resources>
+    <Window.DataContext>
+        <!--Only for UI-->
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
     <Grid x:Name="MainGrid">
         <Grid.Resources>
             <Style TargetType="GroupBox">
@@ -22,8 +27,8 @@
                 <Setter Property="BorderThickness" Value="0"></Setter>
             </Style>
             <Style TargetType="Label">
-                <Setter Property="Margin" Value="10"></Setter>
-                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="Margin" Value="3"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
             </Style>
             <Style x:Key="TextBoxInForm" TargetType="TextBox">
                 <Setter Property="Margin" Value="5"></Setter>
@@ -149,36 +154,74 @@
                     <Button Grid.Column="2" Content="删除表"></Button>
                 </Grid>
                 <GroupBox Grid.Row="1" Header="所有表格" DataContext="{Binding ActiveDB}">
-                    <ListView ItemsSource="{Binding Tables}"
+                    <ListView ItemsSource="{Binding Tables}" ScrollViewer.CanContentScroll="False"
                               SelectedItem="{Binding ActivatedTable}"
                               SelectionMode="Single">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel></VirtualizingStackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Expander Header="{Binding Name}" Margin="3" 
-                                          IsExpanded="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Content="定义"></Label>
-                                        <!--<Label Grid.Row="0" Grid.Column="1" Content="{Binding Definition}">
-                                            <Label.Resources>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="TextWrapping" Value="Wrap" />
-                                                </Style>
-                                            </Label.Resources>
-                                        </Label>-->
-                                        <Label Grid.Row="0" Grid.Column="1">
-                                            <Label.Content>
-                                                <AccessText TextWrapping="Wrap" Text="{Binding Definition}"/>
-                                            </Label.Content>
-                                        </Label>
-                                    </Grid>
-                                </Expander>
+                                <StackPanel Margin="3">
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                    <ListView ItemsSource="{Binding FieldsInfo}" ScrollViewer.PanningMode="Both"
+                                              Visibility="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected,Converter={StaticResource BooleanToVisibility}}">
+                                        <ListView.Resources>
+                                            <Style x:Key="TexkBlockInListView" TargetType="TextBlock">
+                                                <Setter Property="FontSize" Value="10"></Setter>
+                                            </Style>
+                                        </ListView.Resources>
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridView.ColumnHeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Style="{StaticResource TexkBlockInListView}" Text="{Binding}" TextAlignment="Left"></TextBlock>
+                                                    </DataTemplate>
+                                                </GridView.ColumnHeaderTemplate>
+                                                <GridView.Columns>
+                                                    <GridViewColumn Header="字段名">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Name}" Style="{StaticResource TexkBlockInListView}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="数据类型">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Type}" Style="{StaticResource TexkBlockInListView}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="PRIMARY KEY">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding IsPrimaryKey}" Style="{StaticResource TexkBlockInListView}"></TextBlock>
+
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="Unique">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding IsUnique}" Style="{StaticResource TexkBlockInListView}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="是否自动增长">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Name}" Style="{StaticResource TexkBlockInListView}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView.Columns>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
