@@ -7,127 +7,131 @@
         x:Name="window"
         Title="SQLite Manager" MinWidth="800" MinHeight="400" Closing="Window_Closing">
     <Window.Resources>
-        <con:NullToVisibilityConverter x:Key="NullToVisibility"></con:NullToVisibilityConverter>
-        <con:OppositeConverter x:Key="Opposite"></con:OppositeConverter>
-        <con:BooleanToVisibilityConverter x:Key="BooleanToVisibility" UseHidden="False"></con:BooleanToVisibilityConverter>
+        <con:NullToVisibilityConverter x:Uid="con:NullToVisibilityConverter_1" x:Key="NullToVisibility"></con:NullToVisibilityConverter>
+        <con:OppositeConverter x:Uid="con:OppositeConverter_1" x:Key="Opposite"></con:OppositeConverter>
+        <con:BooleanToVisibilityConverter x:Uid="con:BooleanToVisibilityConverter_1" x:Key="BooleanToVisibility" UseHidden="False"></con:BooleanToVisibilityConverter>
     </Window.Resources>
     <Window.DataContext>
         <!--Only for UI-->
-        <vm:MainViewModel></vm:MainViewModel>
+        <vm:MainViewModel x:Uid="vm:MainViewModel_1"></vm:MainViewModel>
     </Window.DataContext>
-    <Grid x:Name="MainGrid">
+    <Grid x:Uid="MainGrid" x:Name="MainGrid">
         <Grid.Resources>
-            <Style TargetType="GroupBox">
-                <Setter Property="FontSize" Value="20"></Setter>
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="Padding" Value="5"></Setter>
+            <Style x:Uid="Style_1" TargetType="GroupBox">
+                <Setter x:Uid="Setter_1" Property="FontSize" Value="20"></Setter>
+                <Setter x:Uid="Setter_2" Property="Margin" Value="5"></Setter>
+                <Setter x:Uid="Setter_3" Property="Padding" Value="5"></Setter>
             </Style>
-            <Style TargetType="ListView">
-                <Setter Property="Margin" Value="10"></Setter>
-                <Setter Property="BorderThickness" Value="0"></Setter>
+            <Style x:Uid="Style_2" TargetType="ListView">
+                <Setter x:Uid="Setter_4" Property="Margin" Value="10"></Setter>
+                <Setter x:Uid="Setter_5" Property="BorderThickness" Value="0"></Setter>
             </Style>
-            <Style TargetType="Label">
-                <Setter Property="Margin" Value="3"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
+            <Style x:Uid="Style_3" TargetType="Label">
+                <Setter x:Uid="Setter_6" Property="Margin" Value="3"></Setter>
+                <Setter x:Uid="Setter_7" Property="FontSize" Value="12"></Setter>
             </Style>
-            <Style x:Key="TextBoxInForm" TargetType="TextBox">
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="Padding" Value="5"></Setter>
-                <Setter Property="FontSize" Value="15"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Style x:Uid="Style_4" x:Key="TextBoxInForm" TargetType="TextBox">
+                <Setter x:Uid="Setter_8" Property="Margin" Value="5"></Setter>
+                <Setter x:Uid="Setter_9" Property="Padding" Value="5"></Setter>
+                <Setter x:Uid="Setter_10" Property="FontSize" Value="15"></Setter>
+                <Setter x:Uid="Setter_11" Property="VerticalAlignment" Value="Center"></Setter>
             </Style>
-            <Style TargetType="DataGrid">
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="Padding" Value="5"></Setter>
+            <Style x:Uid="Style_5" TargetType="DataGrid">
+                <Setter x:Uid="Setter_12" Property="Margin" Value="5"></Setter>
+                <Setter x:Uid="Setter_13" Property="Padding" Value="5"></Setter>
             </Style>
-            <Style TargetType="Button">
+            <Style x:Uid="Style_6" TargetType="Button">
                 <Style.Triggers>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Foreground">
+                    <Trigger x:Uid="Trigger_1" Property="IsEnabled" Value="False">
+                        <Setter x:Uid="Setter_14" Property="Foreground">
                             <Setter.Value>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+                                <SolidColorBrush x:Uid="SolidColorBrush_1" Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
                             </Setter.Value>
                         </Setter>
                     </Trigger>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Foreground">
+                    <Trigger x:Uid="Trigger_2" Property="IsMouseOver" Value="True">
+                        <Setter x:Uid="Setter_15" Property="Foreground">
                             <Setter.Value>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
+                                <SolidColorBrush x:Uid="SolidColorBrush_2" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
                             </Setter.Value>
                         </Setter>
                     </Trigger>
                 </Style.Triggers>
-                <Setter Property="Template">
+                <Setter x:Uid="Setter_16" Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ControlTemplate x:Uid="ControlTemplate_1" TargetType="{x:Type Button}">
+                            <Border x:Uid="Border_1" Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Uid="ContentPresenter_1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="FontSize" Value="18"></Setter>
-                <Setter Property="FontWeight" Value="Normal"></Setter>
-                <Setter Property="Padding" Value="5"></Setter>
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="Foreground">
+                <Setter x:Uid="Setter_17" Property="Margin" Value="5"></Setter>
+                <Setter x:Uid="Setter_18" Property="FontSize" Value="18"></Setter>
+                <Setter x:Uid="Setter_19" Property="FontWeight" Value="Normal"></Setter>
+                <Setter x:Uid="Setter_20" Property="Padding" Value="5"></Setter>
+                <Setter x:Uid="Setter_21" Property="BorderThickness" Value="0"></Setter>
+                <Setter x:Uid="Setter_22" Property="Background" Value="White"/>
+                <Setter x:Uid="Setter_23" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                        <SolidColorBrush x:Uid="SolidColorBrush_3" Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Setter.Value>
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Grid>
+        <Grid x:Uid="Grid_1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="2*"></ColumnDefinition>
+                <ColumnDefinition x:Uid="ColumnDefinition_3" Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <GroupBox Header="所有数据库">
-                    <Grid>
+            <Grid x:Uid="Grid_2" Grid.Column="0">
+                <GroupBox x:Uid="GroupBox_1" Header="All Databases">
+                    <Grid x:Uid="Grid_3">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_4"></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_5"></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_6"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_1" Height="auto"></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_2"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="新建" Command="{Binding CreateDBCommand}"></Button>
-                        <Button Grid.Row="0" Grid.Column="1" Content="注册" Command="{Binding RegisterDBCommand}"></Button>
-                        <Button Grid.Row="0" Grid.Column="2" Content="移除" Command="{Binding RemoveDBCommand}"></Button>
-                        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+                        <Button Grid.Row="0" Grid.Column="0" Content="Create" 
+                                x:Uid="ButtonCreateDB"
+                                Command="{Binding CreateDBCommand}"></Button>
+                        <Button x:Uid="Button_1" Grid.Row="0" Grid.Column="1" Content="Register" 
+                                Command="{Binding RegisterDBCommand}"></Button>
+                        <Button x:Uid="Button_2" Grid.Row="0" Grid.Column="2" Content="Remove" 
+                                Command="{Binding RemoveDBCommand}"></Button>
+                        <ListView x:Uid="listView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
                                   ItemsSource="{Binding DBs,Mode=TwoWay}"
                                   SelectedItem="{Binding ActiveDB,Mode=TwoWay}"
                                   x:Name="listView">
                             <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5">
+                                <DataTemplate x:Uid="DataTemplate_1">
+                                    <Border x:Uid="Border_2" Padding="5">
                                         <Border.Style>
-                                            <Style TargetType="Border">
+                                            <Style x:Uid="Style_7" TargetType="Border">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsValid}" Value="True">
-                                                        <Setter Property="BorderBrush" Value="White"></Setter>
-                                                        <Setter Property="BorderThickness" Value="0"></Setter>
+                                                    <DataTrigger x:Uid="DataTrigger_1" Binding="{Binding IsValid}" Value="True">
+                                                        <Setter x:Uid="Setter_24" Property="BorderBrush" Value="White"></Setter>
+                                                        <Setter x:Uid="Setter_25" Property="BorderThickness" Value="0"></Setter>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding IsValid}" Value="False">
-                                                        <Setter Property="BorderBrush" Value="Red"></Setter>
-                                                        <Setter Property="BorderThickness" Value="2"></Setter>
+                                                    <DataTrigger x:Uid="DataTrigger_2" Binding="{Binding IsValid}" Value="False">
+                                                        <Setter x:Uid="Setter_26" Property="BorderBrush" Value="Red"></Setter>
+                                                        <Setter x:Uid="Setter_27" Property="BorderThickness" Value="2"></Setter>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Border.Style>
-                                        <Grid>
+                                        <Grid x:Uid="Grid_4">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition></RowDefinition>
-                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition x:Uid="RowDefinition_3"></RowDefinition>
+                                                <RowDefinition x:Uid="RowDefinition_4"></RowDefinition>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Grid.Row="0" Text="{Binding DBName}" FontWeight="Bold"></TextBlock>
-                                            <TextBlock Grid.Row="1" Text="{Binding DBPath}" FontSize="15"></TextBlock>
+                                            <TextBlock x:Uid="TextBlock_1" Grid.Row="0" Text="{Binding DBName}" FontWeight="Bold"></TextBlock>
+                                            <TextBlock x:Uid="TextBlock_2" Grid.Row="1" Text="{Binding DBPath}" FontSize="15"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -137,38 +141,38 @@
                 </GroupBox>
             </Grid>
 
-            <Grid Grid.Column="1" IsEnabled="{Binding IsActiveDBEnable}">
+            <Grid x:Uid="Grid_5" Grid.Column="1" IsEnabled="{Binding IsActiveDBEnable}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition x:Uid="RowDefinition_5" Height="2*"></RowDefinition>
+                    <RowDefinition x:Uid="RowDefinition_6" Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="所有表格" DataContext="{Binding ActiveDB}">
-                    <Grid>
+                <GroupBox x:Uid="GroupBox_2" Grid.Row="0" Header="All Tables" DataContext="{Binding ActiveDB}">
+                    <Grid x:Uid="Grid_6">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_7" Height="auto"></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_8" Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_7"></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_8"></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_9"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新建表" Command="{Binding ActiveDB.ShowCreateTableCommand}"></Button>
-                        <Button Grid.Column="1" Content="新建视图"></Button>
-                        <Button Grid.Column="2" Content="删除表" Command="{Binding ActiveDB.DeleteCurrentTableCommand}"></Button>
-                        <ListView Grid.Row="1" Grid.ColumnSpan="3"
+                        <Button x:Uid="Button_3" Grid.Column="0" Content="Create Table" Command="{Binding ActiveDB.ShowCreateTableCommand}"></Button>
+                        <Button x:Uid="Button_4" Grid.Column="1" Content="Create View"></Button>
+                        <Button x:Uid="Button_5" Grid.Column="2" Content="Delete Table" Command="{Binding ActiveDB.DeleteCurrentTableCommand}"></Button>
+                        <ListView x:Uid="ListView_1" Grid.Row="1" Grid.ColumnSpan="3"
                                   ItemsSource="{Binding Tables}" ScrollViewer.CanContentScroll="False"
                                   SelectedItem="{Binding ActivatedTable}"
                                   SelectionMode="Single">
                             <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel></VirtualizingStackPanel>
+                                <ItemsPanelTemplate x:Uid="ItemsPanelTemplate_1">
+                                    <VirtualizingStackPanel x:Uid="VirtualizingStackPanel_1"></VirtualizingStackPanel>
                                 </ItemsPanelTemplate>
                             </ListView.ItemsPanel>
                             <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="3">
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                <DataTemplate x:Uid="DataTemplate_2">
+                                    <StackPanel x:Uid="StackPanel_1" Margin="3">
+                                        <TextBlock x:Uid="TextBlock_3" Text="{Binding Name}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -176,59 +180,59 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Grid.Row="1" Header="输入SQL语句">
-                    <Grid>
+                <GroupBox x:Uid="GroupBox_3" Grid.Row="1" Header="Input SQL Script">
+                    <Grid x:Uid="Grid_7">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_9" Height="*"></RowDefinition>
+                            <RowDefinition x:Uid="RowDefinition_10" Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0"></TextBox>
-                        <Button Grid.Row="1" Content="执行SQL语句"></Button>
+                        <TextBox x:Uid="TextBox_1" Grid.Row="0"></TextBox>
+                        <Button x:Uid="Button_6" Grid.Row="1" Content="Excute SQL Script"></Button>
                     </Grid>
                 </GroupBox>
             </Grid>
 
-            <Grid Grid.Column="2">
-                <TabControl Margin="5" Visibility="{Binding ActiveDB.ActivatedTable,Converter={StaticResource NullToVisibility}}">
-                    <TabItem Header="所有字段">
-                        <ListView Grid.Row="0" 
+            <Grid x:Uid="Grid_8" Grid.Column="2">
+                <TabControl x:Uid="TabControl_1" Margin="5" Visibility="{Binding ActiveDB.ActivatedTable,Converter={StaticResource NullToVisibility}}">
+                    <TabItem x:Uid="TabItem_1" Header="All Fields">
+                        <ListView x:Uid="ListView_2" Grid.Row="0" 
                           ItemsSource="{Binding ActiveDB.ActivatedTable.FieldsInfo}" 
                           ScrollViewer.PanningMode="Both">
                             <ListView.View>
-                                <GridView>
+                                <GridView x:Uid="GridView_1">
                                     <GridView.Columns>
-                                        <GridViewColumn Header="字段名">
+                                        <GridViewColumn x:Uid="GridViewColumn_1" Header="Field Name">
                                             <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                <DataTemplate x:Uid="DataTemplate_3">
+                                                    <TextBlock x:Uid="TextBlock_4" Text="{Binding Name}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="数据类型">
+                                        <GridViewColumn x:Uid="GridViewColumn_2" Header="Data Type">
                                             <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding Type}" ></TextBlock>
+                                                <DataTemplate x:Uid="DataTemplate_4">
+                                                    <TextBlock x:Uid="TextBlock_5" Text="{Binding Type}" ></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="PRIMARY KEY">
+                                        <GridViewColumn x:Uid="GridViewColumn_3" Header="Primary Key">
                                             <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding IsPrimaryKey}"></TextBlock>
+                                                <DataTemplate x:Uid="DataTemplate_5">
+                                                    <TextBlock x:Uid="TextBlock_6" Text="{Binding IsPrimaryKey}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="Unique">
+                                        <GridViewColumn x:Uid="GridViewColumn_4" Header="Unique">
                                             <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding IsUnique}"></TextBlock>
+                                                <DataTemplate x:Uid="DataTemplate_6">
+                                                    <TextBlock x:Uid="TextBlock_7" Text="{Binding IsUnique}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="是否自动增长">
+                                        <GridViewColumn x:Uid="GridViewColumn_5" Header="Auto Increase">
                                             <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                <DataTemplate x:Uid="DataTemplate_7">
+                                                    <TextBlock x:Uid="TextBlock_8" Text="{Binding Name}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -237,8 +241,8 @@
                             </ListView.View>
                         </ListView>
                     </TabItem>
-                    <TabItem Header="数据">
-                        <DataGrid Grid.Row="1" Margin="10" BorderThickness="0" IsReadOnly="True" 
+                    <TabItem x:Uid="TabItem_2" Header="Data">
+                        <DataGrid x:Uid="DataGrid_1" Grid.Row="1" Margin="10" BorderThickness="0" IsReadOnly="True" 
                           BorderBrush="White"
                           EnableColumnVirtualization="True" 
                           EnableRowVirtualization="True"
@@ -250,7 +254,7 @@
             </Grid>
         </Grid>
 
-        <Border HorizontalAlignment="Center"
+        <Border x:Uid="Border_3" HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="White"
                 Margin="{Binding RelativeSource={RelativeSource Self},Path=BorderThickness}"
@@ -259,30 +263,30 @@
                 Height="{Binding ElementName=window,Path=ActualHeight}"
                 Visibility="{Binding IsCurrentControlVisible}" RenderTransformOrigin="0.5,0.5">
             <Border.Style>
-                <Style TargetType="Border">
+                <Style x:Uid="Style_8" TargetType="Border">
                     <Style.Triggers>
-                        <Trigger Property="Visibility" Value="Visible">
+                        <Trigger x:Uid="Trigger_3" Property="Visibility" Value="Visible">
                             <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="-1000" To="0" Duration="0:0:1">
+                                <BeginStoryboard x:Uid="BeginStoryboard_1">
+                                    <Storyboard x:Uid="Storyboard_1">
+                                        <DoubleAnimation x:Uid="DoubleAnimation_1" Storyboard.TargetProperty="RenderTransform.Y" From="-1000" To="0" Duration="0:0:1">
                                             <DoubleAnimation.EasingFunction>
-                                                <ElasticEase EasingMode="EaseOut" Oscillations="1" Springiness="5"></ElasticEase>
+                                                <ElasticEase x:Uid="ElasticEase_1" EasingMode="EaseOut" Oscillations="1" Springiness="5"></ElasticEase>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
-                            <Setter Property="RenderTransform">
+                            <Setter x:Uid="Setter_28" Property="RenderTransform">
                                 <Setter.Value>
-                                    <TranslateTransform></TranslateTransform>
+                                    <TranslateTransform x:Uid="TranslateTransform_1"></TranslateTransform>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <ContentControl Content="{Binding CurrentControl}"></ContentControl>
+            <ContentControl x:Uid="ContentControl_1" Content="{Binding CurrentControl}"></ContentControl>
         </Border>
     </Grid>
 </Window>
