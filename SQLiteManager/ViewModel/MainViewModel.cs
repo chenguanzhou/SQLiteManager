@@ -133,7 +133,12 @@ namespace SQLiteManager.ViewModel
             }
             set
             {
+                if (activeDB == value)
+                    return;
+
                 activeDB = value;
+                if (activeDB != null && activeDB.ActivatedTable == null && activeDB.Tables.Count != 0)
+                    activeDB.ActivatedTable = activeDB.Tables[0];
                 RaisePropertyChanged("ActiveDB");
                 RaisePropertyChanged("IsActiveDBEnable");
             }
