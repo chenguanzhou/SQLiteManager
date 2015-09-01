@@ -144,22 +144,23 @@ namespace SQLiteManager.ViewModel
             }
         }
 
-        public bool IsActiveDBEnable { get { return ActiveDB == null ? false : ActiveDB.IsValid; } }
+        public bool IsActiveDBEnable 
+        { 
+            get { return ActiveDB == null ? false : ActiveDB.IsValid; }            
+        }
 
-        private UserControl currentControl = null;
-        public UserControl CurrentControl
+        private bool isCreateTableVisible = false;
+        public bool IsCreateTableVisible 
         {
-            get { return currentControl; }
+            get { return isCreateTableVisible; }
             set
             {
-                if (currentControl == value)
+                if (isCreateTableVisible == value)
                     return;
-                currentControl = value;
-                RaisePropertyChanged("CurrentControl");
-                RaisePropertyChanged("IsCurrentControlVisible");
+                isCreateTableVisible = value;
+                RaisePropertyChanged("IsCreateTableVisible");
             }
         }
-        public Visibility IsCurrentControlVisible { get { return CurrentControl == null ? Visibility.Collapsed : Visibility.Visible; } }
 
         private void CreateDBCommandExcute()
         {

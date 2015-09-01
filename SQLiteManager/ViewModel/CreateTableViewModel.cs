@@ -31,7 +31,7 @@ namespace SQLiteManager.ViewModel
 
         }
 
-        private string name = "新建表";
+        private string name = "NewTable";
         public string Name
         {
             get
@@ -67,10 +67,10 @@ namespace SQLiteManager.ViewModel
         {
             get
             {
-                return new RelayCommand<DataView>(
-                    TableView =>
+                return new RelayCommand(
+                    () =>
                     {
-                        System.Windows.MessageBox.Show(TableView.GetType().ToString());
+
                     }
                 );
             }
@@ -83,7 +83,7 @@ namespace SQLiteManager.ViewModel
                 return new RelayCommand(
                     () =>
                     {
-                        MainViewModel.This.CurrentControl = null;
+                        MainViewModel.This.IsCreateTableVisible = false;
                     }
                 );
             }

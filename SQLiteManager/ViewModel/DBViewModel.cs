@@ -117,6 +117,9 @@ namespace SQLiteManager.ViewModel
                 RaisePropertyChanged("ActivatedTable");
             }
         }
+
+        private CreateTableViewModel createTableModel = new CreateTableViewModel();
+        public CreateTableViewModel CreateTableViewModel { get { return createTableModel; } }
                 
         public ICommand ShowCreateTableCommand
         {
@@ -125,9 +128,7 @@ namespace SQLiteManager.ViewModel
                 return new RelayCommand(
                     () =>
                     {
-                        UserControlCreateTable control = new UserControlCreateTable();
-                        control.DataContext = new CreateTableViewModel();
-                        MainViewModel.This.CurrentControl = control;
+                        MainViewModel.This.IsCreateTableVisible = true;
                     },
                     () => IsValid
                 );

@@ -7,69 +7,28 @@
              xmlns:vm="clr-namespace:SQLiteManager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
-    <UserControl.Style>
-        <Style x:Uid="Style_1" TargetType="UserControl">
-            <Style.Triggers>
-                <Trigger x:Uid="Trigger_1" Property="Visibility" Value="Visible">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard x:Uid="BeginStoryboard_1">
-                            <Storyboard x:Uid="FadeOutAnimation" x:Name="FadeOutAnimation">
-                                <DoubleAnimation x:Uid="DoubleAnimation_1" Storyboard.TargetProperty="Opacity"
-                                FillBehavior="Stop"
-                                BeginTime="0:0:5" From="1.0" To="0.0"
-                                Duration="0:0:1"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard x:Uid="BeginStoryboard_2">
-                            <Storyboard x:Uid="Storyboard_1">
-                                <ObjectAnimationUsingKeyFrames 
-                                x:Uid="ObjectAnimationUsingKeyFrames_1" Storyboard.TargetProperty="Visibility"
-                                BeginTime="0:0:7">
-                                    <DiscreteObjectKeyFrame x:Uid="DiscreteObjectKeyFrame_1">
-                                        <DiscreteObjectKeyFrame.Value>
-                                            <Visibility x:Uid="Visibility_1">Hidden</Visibility>
-                                        </DiscreteObjectKeyFrame.Value>
-                                    </DiscreteObjectKeyFrame>
-                                </ObjectAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
     <Grid x:Uid="Grid_1">
         <Grid.RowDefinitions>
-            <RowDefinition x:Uid="RowDefinition_1" Height="auto"></RowDefinition>
             <RowDefinition x:Uid="RowDefinition_2" Height="auto"></RowDefinition>
             <RowDefinition x:Uid="RowDefinition_3" Height="*"></RowDefinition>
             <RowDefinition x:Uid="RowDefinition_4" Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock x:Uid="TextBlock_1" Grid.Row="0" 
-                           HorizontalAlignment="Center" 
-                           Text="新建表" FontSize="30" FontWeight="Bold"
-                           Padding="5"></TextBlock>
-        <GroupBox x:Uid="GroupBox_1" Grid.Row="1" Header="表格名">
+        <GroupBox x:Uid="GroupBox_1" Grid.Row="0" Header="Table Name">
             <TextBox x:Uid="TextBox_1" Text="{Binding Name}" Padding="5" Margin="5"></TextBox>
         </GroupBox>
-        <GroupBox x:Uid="GroupBox_2" Grid.Row="2" Header="字段" >
+        <GroupBox x:Uid="GroupBox_2" Grid.Row="1" Header="Fields" >
             <DataGrid x:Uid="DataGridFields" x:Name="DataGridFields" ItemsSource="{Binding Fields}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Uid="DataGridTextColumn_1" Header="字段名"></DataGridTextColumn>
-                    <DataGridComboBoxColumn x:Uid="DataGridComboBoxColumn_1" Header="类型"></DataGridComboBoxColumn>
+                    <DataGridTextColumn x:Uid="DataGridTextColumn_1" Header="Name"></DataGridTextColumn>
+                    <DataGridComboBoxColumn x:Uid="DataGridComboBoxColumn_1" Header="Data Type"></DataGridComboBoxColumn>
                     <DataGridCheckBoxColumn x:Uid="DataGridCheckBoxColumn_1" Header="Primary Key"></DataGridCheckBoxColumn>
                     <DataGridCheckBoxColumn x:Uid="DataGridCheckBoxColumn_2" Header="Unique"></DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <StackPanel x:Uid="StackPanel_1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Uid="Button_1" Content="创建" 
-                            Command="{Binding CreateCommand}" 
-                            CommandParameter="{Binding ElementName=DataGridFields,Path=ItemsSource}"></Button>
-            <Button x:Uid="Button_2" Content="取消"
-                            Command="{Binding CancelCommand}"></Button>
-        </StackPanel>
+        <Menu Grid.Row="2" HorizontalAlignment="Right">
+            <MenuItem Header="Create" Command="{Binding CreateCommand}"></MenuItem>
+            <MenuItem Header="Cancel" Command="{Binding CancelCommand}"></MenuItem>
+        </Menu>
     </Grid>
 </UserControl>

@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:SQLiteManager.ViewModel"
         xmlns:local="clr-namespace:SQLiteManager"
         xmlns:con="clr-namespace:SQLiteManager.Converter"
-        xmlns:modern="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:modern="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                    
         x:Name="window"
         Title="SQLite Manager" MinWidth="800" MinHeight="400" Closing="Window_Closing">
     <modern:MetroWindow.Resources>
@@ -31,12 +31,22 @@
         <!--Only for UI-->
         <vm:MainViewModel x:Uid="vm:MainViewModel_1"></vm:MainViewModel>
     </modern:MetroWindow.DataContext>
+    
+    <modern:MetroWindow.Flyouts>
+        <modern:FlyoutsControl>
+            <modern:Flyout 
+                IsOpen="{Binding IsCreateTableVisible}" Header="Create New Table"
+                IsModal="True" Position="Right" Theme="Adapt">
+                <local:UserControlCreateTable DataContext="{Binding ActiveDB.CreateTableViewModel}"></local:UserControlCreateTable>
+            </modern:Flyout>
+        </modern:FlyoutsControl>
+    </modern:MetroWindow.Flyouts>
     <Grid x:Uid="MainGrid" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Margin="5">
             <MenuItem Header="Create"
                     Command="{Binding CreateDBCommand}"></MenuItem>
             <MenuItem Header="Register" 
@@ -44,13 +54,13 @@
             <MenuItem Header="Remove" 
                     Command="{Binding RemoveDBCommand}"></MenuItem>
         </Menu>
-        <Grid x:Uid="Grid_1" Grid.Row="1">
+        <Grid x:Uid="Grid_1" Grid.Row="1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Uid="ColumnDefinition_1" Width="*" MinWidth="200"></ColumnDefinition>
                 <ColumnDefinition x:Uid="ColumnDefinition_2" Width="4*"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <Grid x:Uid="Grid_2" Grid.Column="0" Margin="5">
+            <Grid x:Uid="Grid_2" Grid.Column="0" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -58,7 +68,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="All Databases" FontSize="20">
                 </TextBlock>
-                <Separator Grid.Row="1" Background="#11FFFFFF"></Separator>
+                <Separator Grid.Row="1" Margin="0,5,0,5" Foreground="#11FFFFFF"></Separator>
                 <ListBox Grid.Row="2"
                           ItemsSource="{Binding DBs,Mode=TwoWay}"
                           SelectedItem="{Binding ActiveDB,Mode=TwoWay}"
@@ -94,7 +104,7 @@
                 </ListBox>
             </Grid>
 
-            <Grid Grid.Column="1" IsEnabled="{Binding IsActiveDBEnable}" DataContext="{Binding ActiveDB}">
+            <Grid Grid.Column="1" Margin="10" IsEnabled="{Binding IsActiveDBEnable}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -103,16 +113,18 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Tables" FontSize="20">
                 </TextBlock>
-                <Separator Grid.Row="1" Background="#11FFFFFF"></Separator>
-                <Menu Grid.Row="2">
+                <Separator Grid.Row="1" Margin="0,5,0,5" Foreground="#11FFFFFF"></Separator>
+                <Menu Grid.Row="2" Margin="5">
                     <MenuItem Header="Create Table" Command="{Binding ActiveDB.ShowCreateTableCommand}"></MenuItem>
                     <MenuItem Header="Create View"></MenuItem>
                     <MenuItem Header="Delete Table" Command="{Binding ActiveDB.DeleteCurrentTableCommand}"></MenuItem>
                 </Menu>
-                <modern:MetroAnimatedSingleRowTabControl Grid.Row="3" Grid.ColumnSpan="3"
-                                  ItemsSource="{Binding Tables}" ScrollViewer.CanContentScroll="False"
-                                  SelectedItem="{Binding ActivatedTable}"
-                                  TabStripPlacement="Left">
+                <modern:MetroAnimatedSingleRowTabControl 
+                    Grid.Row="3" Grid.ColumnSpan="3"                                                         
+                    DataContext="{Binding ActiveDB}"
+                    ItemsSource="{Binding Tables}" ScrollViewer.CanContentScroll="False"
+                    SelectedItem="{Binding ActivatedTable}"
+                    TabStripPlacement="Left">
                     <modern:MetroAnimatedSingleRowTabControl.ItemsPanel>
                         <ItemsPanelTemplate x:Uid="ItemsPanelTemplate_1">
                             <VirtualizingStackPanel x:Uid="VirtualizingStackPanel_1"></VirtualizingStackPanel>
@@ -126,7 +138,7 @@
                     <modern:MetroAnimatedSingleRowTabControl.ContentTemplate>
                         <DataTemplate>
                             <modern:MetroAnimatedSingleRowTabControl x:Uid="TabControl_1" Margin="20">
-                                <TabItem x:Uid="TabItem_1" Header="All Fields">
+                                <TabItem x:Uid="TabItem_1" Header="Fields">
                                     <ListView x:Uid="ListView_2" Grid.Row="0" BorderThickness="0"
                                               ItemsSource="{Binding FieldsInfo}">
                                         <ListView.View>
@@ -149,7 +161,6 @@
                                                     <GridViewColumn x:Uid="GridViewColumn_3" Header="Primary Key">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate x:Uid="DataTemplate_5">
-                                                                <!--<TextBlock x:Uid="TextBlock_6" Text="{Binding IsPrimaryKey}"></TextBlock>-->
                                                                 <modern:ToggleSwitch Style="{StaticResource CustomMetroToggleSwitch}" IsEnabled="False" IsChecked="{Binding IsPrimaryKey}"></modern:ToggleSwitch>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
@@ -157,7 +168,7 @@
                                                     <GridViewColumn x:Uid="GridViewColumn_4" Header="Unique">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate x:Uid="DataTemplate_6">
-                                                                <TextBlock x:Uid="TextBlock_7" Text="{Binding IsUnique}"></TextBlock>
+                                                                <modern:ToggleSwitch Style="{StaticResource CustomMetroToggleSwitch}" IsEnabled="False" IsChecked="{Binding IsUnique}"></modern:ToggleSwitch>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
@@ -173,12 +184,13 @@
                                         </ListView.View>
                                     </ListView>
                                 </TabItem>
-                                <TabItem x:Uid="TabItem_2" Header="Data">
-                                    <DataGrid x:Uid="DataGrid_1" Grid.Row="1" Margin="10" BorderThickness="0" IsReadOnly="True" 
-                                                      BorderBrush="White"
-                                                      EnableColumnVirtualization="True" 
-                                                      EnableRowVirtualization="True"
-                                                      ItemsSource="{Binding Table}">
+                                <TabItem Header="Data">
+                                    <DataGrid 
+                                        Grid.Row="1" Margin="10" BorderThickness="0" IsReadOnly="True" 
+                                        BorderBrush="White"
+                                        EnableColumnVirtualization="True" 
+                                        EnableRowVirtualization="True"
+                                        ItemsSource="{Binding Table}">
                                     </DataGrid>
                                 </TabItem>
                             </modern:MetroAnimatedSingleRowTabControl>
@@ -186,28 +198,6 @@
                     </modern:MetroAnimatedSingleRowTabControl.ContentTemplate>
                 </modern:MetroAnimatedSingleRowTabControl>
             </Grid>
-
-            <!--<GroupBox x:Uid="GroupBox_3" Grid.Row="1" Header="SQL Script">
-                    <Grid x:Uid="Grid_7">
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Uid="RowDefinition_9" Height="*"></RowDefinition>
-                            <RowDefinition x:Uid="RowDefinition_10" Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBox x:Uid="TextBox_1" Grid.Row="0"></TextBox>
-                        <Button Grid.Row="1" Width="36" Height="36" Style="{DynamicResource MetroCircleButtonStyle}">
-                            <Rectangle Width="16"
-                               Height="16"
-                               Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                                <Rectangle.OpacityMask>
-                                    <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_check}" />
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
-                        </Button>
-                    </Grid>
-                </GroupBox>-->
         </Grid>
-
-        <!--<ContentControl x:Uid="ContentControl_1" Content="{Binding CurrentControl}"></ContentControl>-->
     </Grid>
 </modern:MetroWindow>
