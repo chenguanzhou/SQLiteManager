@@ -7,6 +7,13 @@
              xmlns:vm="clr-namespace:SQLiteManager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid x:Uid="Grid_1">
         <Grid.RowDefinitions>
             <RowDefinition x:Uid="RowDefinition_2" Height="auto"></RowDefinition>
@@ -17,14 +24,47 @@
             <TextBox x:Uid="TextBox_1" Text="{Binding Name}" Padding="5" Margin="5"></TextBox>
         </GroupBox>
         <GroupBox x:Uid="GroupBox_2" Grid.Row="1" Header="Fields" >
-            <DataGrid x:Uid="DataGridFields" x:Name="DataGridFields" ItemsSource="{Binding Fields}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn x:Uid="DataGridTextColumn_1" Header="Name"></DataGridTextColumn>
-                    <DataGridComboBoxColumn x:Uid="DataGridComboBoxColumn_1" Header="Data Type"></DataGridComboBoxColumn>
-                    <DataGridCheckBoxColumn x:Uid="DataGridCheckBoxColumn_1" Header="Primary Key"></DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn x:Uid="DataGridCheckBoxColumn_2" Header="Unique"></DataGridCheckBoxColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Width="36"
+                        Height="36"
+                        Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="16"
+                               Height="16"
+                               Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Uniform"
+                                         Visual="{DynamicResource appbar_add}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    <Button Width="36"
+                        Height="36"
+                        Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="16"
+                               Height="16"
+                               Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Uniform"
+                                         Visual="{DynamicResource appbar_minus}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                </StackPanel>
+                <DataGrid Grid.Row="1" x:Name="DataGridFields" ItemsSource="{Binding Fields}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Data Type">
+                        </DataGridComboBoxColumn>
+                        <DataGridCheckBoxColumn Header="Primary Key"></DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Header="Unique"></DataGridCheckBoxColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>            
         </GroupBox>
         <Menu Grid.Row="2" HorizontalAlignment="Right">
             <MenuItem Header="Create" Command="{Binding CreateCommand}"></MenuItem>

@@ -50,7 +50,8 @@ namespace SQLiteManager.ViewModel
                             Type = dr["DataTypeName"].ToString(),
                             IsPrimaryKey = (bool)dr["IsKey"],
                             IsUnique = (bool)dr["IsUnique"],
-                            AllowDBNull = (bool)dr["AllowDBNull"]
+                            AllowDBNull = (bool)dr["AllowDBNull"],
+                            IsAutoIncrement = (bool)dr["IsAutoIncrement"]
                         };
                         FieldsInfo.Add(fieldInfo);
                     }

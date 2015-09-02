@@ -95,8 +95,8 @@
                                         <RowDefinition x:Uid="RowDefinition_3"></RowDefinition>
                                         <RowDefinition x:Uid="RowDefinition_4"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock x:Uid="TextBlock_1" Grid.Row="0" Text="{Binding DBName}" FontWeight="Bold"></TextBlock>
-                                    <TextBlock x:Uid="TextBlock_2" Grid.Row="1" Text="{Binding DBPath}" FontSize="15"></TextBlock>
+                                    <TextBlock x:Uid="TextBlock_1" Grid.Row="0" Text="{Binding DBName}" FontSize="18"  FontWeight="Bold"></TextBlock>
+                                    <TextBlock x:Uid="TextBlock_2" Grid.Row="1" Text="{Binding DBPath}" FontSize="12"></TextBlock>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -175,7 +175,7 @@
                                                     <GridViewColumn x:Uid="GridViewColumn_5" Header="Auto Increase">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate x:Uid="DataTemplate_7">
-                                                                <TextBlock x:Uid="TextBlock_8" Text="{Binding Name}"></TextBlock>
+                                                                <modern:ToggleSwitch Style="{StaticResource CustomMetroToggleSwitch}" IsEnabled="False" IsChecked="{Binding IsAutoIncrement}"></modern:ToggleSwitch>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>

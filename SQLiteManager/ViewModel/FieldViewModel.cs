@@ -84,6 +84,24 @@ namespace SQLiteManager.ViewModel
             }
         }
 
+
+
+        private bool isAutoIncrement = false;
+        public bool IsAutoIncrement
+        {
+            get
+            {
+                return isAutoIncrement;
+            }
+            set
+            {
+                if (isAutoIncrement == value)
+                    return;
+                isAutoIncrement = value;
+                RaisePropertyChanged("IsAutoIncrement");
+            }
+        }
+
         private bool allowDBNull = false;
         public bool AllowDBNull
         {
