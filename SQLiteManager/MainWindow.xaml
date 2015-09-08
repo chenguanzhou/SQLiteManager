@@ -6,7 +6,8 @@
         xmlns:con="clr-namespace:SQLiteManager.Converter"
         xmlns:modern="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                    
         x:Name="window"
-        Title="SQLite Manager" MinWidth="800" MinHeight="400" Closing="Window_Closing">
+        DataContext="{Binding Main,Source={StaticResource Locator}}"
+        Title="SQLite Manager" MinWidth="800" MinHeight="400" Closing="Window_Closing" Icon="Icon/SQLite.ico">
     <modern:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,12 +27,7 @@
                             Value="False" />
             </Style>
         </ResourceDictionary>
-    </modern:MetroWindow.Resources>
-    <modern:MetroWindow.DataContext>
-        <!--Only for UI-->
-        <vm:MainViewModel x:Uid="vm:MainViewModel_1"></vm:MainViewModel>
-    </modern:MetroWindow.DataContext>
-    
+    </modern:MetroWindow.Resources>    
     <modern:MetroWindow.Flyouts>
         <modern:FlyoutsControl>
             <modern:Flyout 
