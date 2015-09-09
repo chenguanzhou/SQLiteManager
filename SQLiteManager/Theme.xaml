@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:modern="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                    
+                    xmlns:local="clr-namespace:SQLiteManager">
+    <Style x:Key="CustomMetroToggleSwitch"
+                       TargetType="{x:Type modern:ToggleSwitch}"
+                       BasedOn="{StaticResource MetroToggleSwitch}">
+        <Setter Property="SwitchForeground"
+                            Value="Red" />
+        <Setter Property="OnLabel"
+                            Value="True" />
+        <Setter Property="OffLabel"
+                            Value="False" />
+    </Style>
+</ResourceDictionary>
