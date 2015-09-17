@@ -42,16 +42,25 @@ namespace SQLiteManager.ViewModel
                 var schema = conn.GetSchema("Tables");
                 foreach (System.Data.DataRow row in schema.Rows)
                 {
-                    TableViewModel table = new TableViewModel(row.ItemArray[2].ToString(), row.ItemArray[6].ToString(), conn);
-                    Tables.Add(table);
+                    try
+                    {
+                        TableViewModel table = new TableViewModel(row.ItemArray[2].ToString(), row.ItemArray[6].ToString(), conn);
+                        Tables.Add(table);
+                    }
+                    catch(Exception)
+                    {
+                        continue;
+                    }
+                    
                 }
                 
 
                 IsValid = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 IsValid = false;
+                System.Windows.MessageBox.Show(ex.Message);
             }
         }
 
